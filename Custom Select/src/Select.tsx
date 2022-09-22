@@ -24,6 +24,9 @@ export function Select({value, onChange, options}: SelectProps) {
     onChange(opt);
   }
 
+  const isSelectedOption = (option: SelectOption) => {
+    return value === option
+  }
   return (
     <div 
       tabIndex={0}
@@ -51,7 +54,7 @@ export function Select({value, onChange, options}: SelectProps) {
         {options.map( option => {
           return <li 
             key={option.value} 
-            className={styles.option}
+            className={`${styles.option} ${isSelectedOption(option) ? styles.selected: ""}`}
             onClick={() => selectOption(option)}
             >{option.label}</li>
         })}

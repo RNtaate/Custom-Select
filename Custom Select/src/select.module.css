@@ -75,12 +75,12 @@
 }
 
 .option.highlighted {
-  background-color: hsl(200, 100%, 50%);
+  background-color: #bbb;
   color: white;
 }
 
-.option:hover {
+/* .option:hover {
   background-color: hsl(200, 100%, 50%);
   cursor: pointer;
   color: white;
-}
+} */

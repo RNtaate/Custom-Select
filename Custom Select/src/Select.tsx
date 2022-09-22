@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from "./select.module.css";
 
 type SelectOption = {
@@ -15,6 +15,7 @@ type SelectProps = {
 export function Select({value, onChange, options}: SelectProps) {
 
   const [isOpen, setIsOpen] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState(0);
 
   const clearOption = () => {
     onChange(undefined)
@@ -27,6 +28,11 @@ export function Select({value, onChange, options}: SelectProps) {
   const isSelectedOption = (option: SelectOption) => {
     return value === option
   }
+
+  useEffect(() => {
+    if (isOpen) setHighlightedIndex(0)
+  }, [isOpen])
+
   return (
     <div 
       tabIndex={0}
@@ -51,11 +57,12 @@ export function Select({value, onChange, options}: SelectProps) {
       ></div>
 
       <ul className={`${styles.options} ${isOpen? styles.show : ""}`}>
-        {options.map( option => {
+        {options.map( (option, index) => {
           return <li 
             key={option.value} 
-            className={`${styles.option} ${isSelectedOption(option) ? styles.selected: ""}`}
+            className={`${styles.option} ${isSelectedOption(option) ? styles.selected: ""} ${highlightedIndex === index ? styles.highlighted : ""}`}
             onClick={() => selectOption(option)}
+            onMouseEnter= {() => setHighlightedIndex(index)}
             >{option.label}</li>
         })}
       </ul>

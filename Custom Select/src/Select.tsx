@@ -16,6 +16,10 @@ export function Select({value, onChange, options}: SelectProps) {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const clearOption = () => {
+    onChange(undefined)
+  }
+
   return (
     <div 
       tabIndex={0}
@@ -26,6 +30,9 @@ export function Select({value, onChange, options}: SelectProps) {
       <span className={styles.value}>{value?.label}</span>
       <button 
         className={styles["clear-btn"]}
+        onClick={ e => {
+          e.stopPropagation()
+          clearOption()}}
       >&times;</button>
       <div className={styles.divider}></div>
       <div className={styles.caret}></div>

@@ -70,9 +70,8 @@
   cursor: pointer;
 }
 
-.option:hover {
-  background-color: hsl(200, 100%, 50%);
-  cursor: pointer;
+.option.selected {
+  background-color: hsl(200, 100%, 70%);
 }
 
 .option.highlighted {
@@ -80,6 +79,8 @@
   color: white;
 }
 
-.option.selected {
-  background-color: hsl(200, 100%, 70%);
+.option:hover {
+  background-color: hsl(200, 100%, 50%);
+  cursor: pointer;
+  color: white;
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styles from "./select.module.css";
 
 type SelectOption = {
-  label: String
+  label: string
   value: number
 }
 

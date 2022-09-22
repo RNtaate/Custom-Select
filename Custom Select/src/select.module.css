@@ -52,7 +52,7 @@
   border-radius: .25em;
   position: absolute;
   top: calc(100% + .3em);
-  /* display: none; */
+  display: none;
   left: 0;
   width: 100%;
   background-color: white;

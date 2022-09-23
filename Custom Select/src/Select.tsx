@@ -6,27 +6,45 @@ export type SelectOption = {
   value: string | number
 }
 
-type SelectProps = {
-  value?: SelectOption 
-  onChange: (value: SelectOption | undefined) => void
-  options: SelectOption[]
+type MultipleSelectProps = {
+  multiple: true
+  value: SelectOption[]
+  onChange: (value: SelectOption[]) => void
 }
 
-export function Select({value, onChange, options}: SelectProps) {
+type SingleSelectProps = {
+  multiple?: false
+  value?: SelectOption
+  onChange: (value: SelectOption | undefined) => void
+}
+
+type SelectProps = {
+  options: SelectOption[]
+} & (SingleSelectProps | MultipleSelectProps)
+
+export function Select({multiple, value, onChange, options}: SelectProps) {
 
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
 
   const clearOption = () => {
-    onChange(undefined)
+    multiple ? onChange([]) : onChange(undefined)
   }
 
   const selectOption = (opt: SelectOption) => {
-    if (value != opt) onChange(opt);
+    if (multiple) {
+      if (value.includes(opt)) {
+        onChange(value.filter( el => el !==  opt))
+      }else {
+        onChange([...value, opt])
+      }
+    }else {
+      if (value !== opt) onChange(opt)
+    }
   }
 
   const isSelectedOption = (option: SelectOption) => {
-    return value === option
+    return multiple ? value.includes(option) : value === option
   }
 
   useEffect(() => {
@@ -40,7 +58,17 @@ export function Select({value, onChange, options}: SelectProps) {
       onClick = {() => setIsOpen(prev => !prev)}
       className={styles.container}
     >
-      <span className={styles.value}>{value?.label}</span>
+      <span className={styles.value}>{ multiple ? (value.map(opt => {
+      return <button key={opt.value} onClick={e => {
+        e.stopPropagation();
+        selectOption(opt)
+      }}
+        className={styles["card-btn"]}
+      >
+        <span className={styles.holder}>{opt.label}</span>
+        <span className={styles["card-remove"]}>&times;</span>
+      </button>
+      })) : value?.label }</span>
       <button 
         className={styles["clear-btn"]}
         onClick={ e => {

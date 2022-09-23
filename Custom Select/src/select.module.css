@@ -17,6 +17,9 @@
 
 .value {
   flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5em;
 }
 
 .clear-btn {
@@ -84,3 +87,33 @@
   cursor: pointer;
   color: white;
 } */
+
+.card-btn {
+  background: none;
+  outline: none;
+  padding: .15em .25em;
+  border: .05em solid #777;
+  border-radius: .25em;
+  display: flex;
+  align-items: center;
+  gap: .25em;
+  cursor: pointer;
+  font-size: .95em;
+}
+
+.card-btn > .card-remove {
+  font-size: 1.35em;
+  color: #777;
+  padding: 0;
+}
+
+.card-btn:hover,
+.card-btn:focus {
+  background-color: hsl(0, 100%, 90%);
+  border-color: hsl(0, 100%, 50%);
+}
+
+.card-btn:hover > .card-remove,
+.card-btn:focus > .card-remove {
+  color: hsl(0, 100%, 50%);
+}

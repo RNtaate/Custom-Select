@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import styles from "./select.module.css";
 
-type SelectOption = {
+export type SelectOption = {
   label: string
-  value: number
+  value: string | number
 }
 
 type SelectProps = {

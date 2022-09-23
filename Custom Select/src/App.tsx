@@ -11,9 +11,12 @@ let options = [
 ]
 function App() {
   const[value, setValue] = useState<SelectOption | undefined>(options[0]);
+  const[value2, setValue2] = useState<SelectOption[]>([])
 
   return (
     <main>
+      <Select multiple={true} options={options} value={value2} onChange={optArr => setValue2(optArr)}/>
+      <br />
       <Select options={ options } value={value} onChange={opt => setValue(opt)}/>
     </main>
   )

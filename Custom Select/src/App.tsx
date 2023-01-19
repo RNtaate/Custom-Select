@@ -12,6 +12,9 @@ let options = [
   {label: "C++", value: 7},
   {label: "C#", value: 8},
   {label: "PHP", value: 9},
+  {label: "HTML & CSS", value: 10},
+  {label: "Swift", value: 11},
+  {label: "R", value: 12},
 ]
 function App() {
   const[value, setValue] = useState<SelectOption | undefined>(options[0]);
